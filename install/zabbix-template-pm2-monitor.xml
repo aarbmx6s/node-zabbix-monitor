@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-04-03T14:35:46Z</date>
+    <groups>
+        <group>
+            <name>Linux servers</name>
+        </group>
+        <group>
+            <name>ZPM2M</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Server Status</template>
+            <name>Server Status</name>
+            <groups>
+                <group>
+                    <name>Linux servers</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>CPU: load</name>
+                    <key>system.cpu.load[,]</key>
+                    <delay>5s</delay>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>CPU: max</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.max</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.cpu.num[max]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>CPU: cores</name>
+                    <key>system.cpu.num[max]</key>
+                    <delay>10s</delay>
+                </item>
+                <item>
+                    <name>DISK: total</name>
+                    <key>vfs.fs.size[/,total]</key>
+                    <units>B</units>
+                </item>
+                <item>
+                    <name>DISK: used</name>
+                    <key>vfs.fs.size[/,used]</key>
+                </item>
+            </items>
+        </template>
+        <template>
+            <template>Zabbix PM2 monitor</template>
+            <name>Zabbix PM2 monitor</name>
+            <groups>
+                <group>
+                    <name>ZPM2M</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>ZPM2M</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>ALL</name>
+                    <key>pm2.monitor.all</key>
+                    <delay>30s</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>ZPM2M</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Processes:  online</name>
+                    <type>DEPENDENT</type>
+                    <key>pm2.monitor.oproc</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ZPM2M</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.online</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pm2.monitor.all</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Processes:  stopped</name>
+                    <type>DEPENDENT</type>
+                    <key>pm2.monitor.sproc</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ZPM2M</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.stopped</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pm2.monitor.all</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Processes:  total</name>
+                    <type>DEPENDENT</type>
+                    <key>pm2.monitor.tproc</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ZPM2M</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.total</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pm2.monitor.all</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Processes:  unknown status</name>
+                    <type>DEPENDENT</type>
+                    <key>pm2.monitor.uproc</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ZPM2M</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.unknown_status</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pm2.monitor.all</key>
+                    </master_item>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>CPU</name>
+            <graph_items>
+                <graph_item>
+                    <color>00FF00</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>system.cpu.max</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FF0000</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>system.cpu.load[,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>DISK</name>
+            <graph_items>
+                <graph_item>
+                    <color>4B4B4B</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>vfs.fs.size[/,total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>4CAF50</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>vfs.fs.size[/,used]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>PM2 Processes</name>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>969696</color>
+                    <item>
+                        <host>Zabbix PM2 monitor</host>
+                        <key>pm2.monitor.tproc</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>81C784</color>
+                    <item>
+                        <host>Zabbix PM2 monitor</host>
+                        <key>pm2.monitor.oproc</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>BF00FF</color>
+                    <item>
+                        <host>Zabbix PM2 monitor</host>
+                        <key>pm2.monitor.uproc</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>FF0000</color>
+                    <item>
+                        <host>Zabbix PM2 monitor</host>
+                        <key>pm2.monitor.sproc</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

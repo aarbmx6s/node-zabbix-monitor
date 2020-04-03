@@ -1,0 +1,12 @@
+{
+  "name": "zabbix-pm2-monitor",
+  "version": "1.0.0",
+  "description": "PM2 information collector for zabbix",
+  "main": "src/js/index.js",
+  "bin": {
+    "zabbix-pm2-monitor": "./bin/index.js"
+  },
+  "scripts": { },
+  "author": "aarbmx6s",
+  "license": "ISC"
+}

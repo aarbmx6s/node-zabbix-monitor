@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-04-03T14:34:47Z</date>
+    <groups>
+        <group>
+            <name>Linux servers</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Server Status</template>
+            <name>Server Status</name>
+            <groups>
+                <group>
+                    <name>Linux servers</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>CPU: load</name>
+                    <key>system.cpu.load[,]</key>
+                    <delay>5s</delay>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>CPU: max</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.max</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.cpu.num[max]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>CPU: cores</name>
+                    <key>system.cpu.num[max]</key>
+                    <delay>10s</delay>
+                </item>
+                <item>
+                    <name>DISK: total</name>
+                    <key>vfs.fs.size[/,total]</key>
+                    <units>B</units>
+                </item>
+                <item>
+                    <name>DISK: used</name>
+                    <key>vfs.fs.size[/,used]</key>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>CPU</name>
+            <graph_items>
+                <graph_item>
+                    <color>00FF00</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>system.cpu.max</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FF0000</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>system.cpu.load[,]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>DISK</name>
+            <graph_items>
+                <graph_item>
+                    <color>4B4B4B</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>vfs.fs.size[/,total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>4CAF50</color>
+                    <item>
+                        <host>Server Status</host>
+                        <key>vfs.fs.size[/,used]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
