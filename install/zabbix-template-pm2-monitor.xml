@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-03T14:35:46Z</date>
+    <date>2020-04-03T17:03:44Z</date>
     <groups>
         <group>
-            <name>Linux servers</name>
+            <name>Templates/Applications</name>
         </group>
         <group>
             <name>ZPM2M</name>
@@ -12,54 +12,58 @@
     </groups>
     <templates>
         <template>
-            <template>Server Status</template>
-            <name>Server Status</name>
+            <template>Node.js</template>
+            <name>Node.js</name>
             <groups>
                 <group>
-                    <name>Linux servers</name>
+                    <name>Templates/Applications</name>
                 </group>
             </groups>
+            <applications>
+                <application>
+                    <name>Node.js</name>
+                </application>
+            </applications>
             <items>
                 <item>
-                    <name>CPU: load</name>
-                    <key>system.cpu.load[,]</key>
+                    <name>Node.js: Processes: used</name>
+                    <key>proc.cpu.util[,,total,node]</key>
                     <delay>5s</delay>
                     <value_type>FLOAT</value_type>
-                    <preprocessing>
-                        <step>
-                            <type>MULTIPLIER</type>
-                            <params>100</params>
-                        </step>
-                    </preprocessing>
+                    <applications>
+                        <application>
+                            <name>Node.js</name>
+                        </application>
+                    </applications>
                 </item>
                 <item>
-                    <name>CPU: max</name>
-                    <type>DEPENDENT</type>
-                    <key>system.cpu.max</key>
-                    <delay>0</delay>
-                    <preprocessing>
-                        <step>
-                            <type>MULTIPLIER</type>
-                            <params>100</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>system.cpu.num[max]</key>
-                    </master_item>
+                    <name>Node.js RAM: used</name>
+                    <key>proc.mem[,,sum,node,pmem]</key>
+                    <delay>5s</delay>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>Node.js</name>
+                        </application>
+                    </applications>
                 </item>
                 <item>
-                    <name>CPU: cores</name>
-                    <key>system.cpu.num[max]</key>
-                    <delay>10s</delay>
+                    <name>Node.js Processes: total</name>
+                    <key>proc.num[,,,node]</key>
+                    <applications>
+                        <application>
+                            <name>Node.js</name>
+                        </application>
+                    </applications>
                 </item>
                 <item>
-                    <name>DISK: total</name>
-                    <key>vfs.fs.size[/,total]</key>
-                    <units>B</units>
-                </item>
-                <item>
-                    <name>DISK: used</name>
-                    <key>vfs.fs.size[/,used]</key>
+                    <name>Node.js RAM: total</name>
+                    <key>vm.memory.size[total]</key>
+                    <applications>
+                        <application>
+                            <name>Node.js</name>
+                        </application>
+                    </applications>
                 </item>
             </items>
         </template>
@@ -174,41 +178,43 @@
     </templates>
     <graphs>
         <graph>
-            <name>CPU</name>
+            <name>Node.js: Processes</name>
+            <ymin_type_1>FIXED</ymin_type_1>
             <graph_items>
                 <graph_item>
-                    <color>00FF00</color>
+                    <color>1A7C11</color>
                     <item>
-                        <host>Server Status</host>
-                        <key>system.cpu.max</key>
+                        <host>Node.js</host>
+                        <key>proc.num[,,,node]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <color>FF0000</color>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>Server Status</host>
-                        <key>system.cpu.load[,]</key>
+                        <host>Node.js</host>
+                        <key>proc.cpu.util[,,total,node]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>DISK</name>
+            <name>Node.js RAM</name>
             <graph_items>
                 <graph_item>
-                    <color>4B4B4B</color>
+                    <color>1A7C11</color>
                     <item>
-                        <host>Server Status</host>
-                        <key>vfs.fs.size[/,total]</key>
+                        <host>Node.js</host>
+                        <key>vm.memory.size[total]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <color>4CAF50</color>
+                    <color>F63100</color>
                     <item>
-                        <host>Server Status</host>
-                        <key>vfs.fs.size[/,used]</key>
+                        <host>Node.js</host>
+                        <key>proc.mem[,,sum,node,pmem]</key>
                     </item>
                 </graph_item>
             </graph_items>
