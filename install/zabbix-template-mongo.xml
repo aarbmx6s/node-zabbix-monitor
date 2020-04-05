@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-05T12:14:23Z</date>
+    <date>2020-04-05T13:40:59Z</date>
     <groups>
         <group>
             <name>MongoDB</name>
@@ -55,7 +55,7 @@
                             </applications>
                         </item_prototype>
                         <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: delete</name>
+                            <name>MongoDB: dstats: {#HOST}: op: delete</name>
                             <type>CALCULATED</type>
                             <key>nz.collect.mongo.dhost[{#HOST},delete]</key>
                             <delay>10s</delay>
@@ -67,7 +67,7 @@
                             </applications>
                         </item_prototype>
                         <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: insert</name>
+                            <name>MongoDB: dstats: {#HOST}: op: insert</name>
                             <type>CALCULATED</type>
                             <key>nz.collect.mongo.dhost[{#HOST},insert]</key>
                             <delay>10s</delay>
@@ -79,7 +79,7 @@
                             </applications>
                         </item_prototype>
                         <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: query</name>
+                            <name>MongoDB: dstats: {#HOST}: op: query</name>
                             <type>CALCULATED</type>
                             <key>nz.collect.mongo.dhost[{#HOST},query]</key>
                             <delay>10s</delay>
@@ -91,7 +91,7 @@
                             </applications>
                         </item_prototype>
                         <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: update</name>
+                            <name>MongoDB: dstats: {#HOST}: op: update</name>
                             <type>CALCULATED</type>
                             <key>nz.collect.mongo.dhost[{#HOST},update]</key>
                             <delay>10s</delay>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-05T12:13:43Z</date>
+    <date>2020-04-05T13:49:36Z</date>
     <groups>
         <group>
             <name>PM2</name>
@@ -128,7 +128,21 @@
                             <key>nz.collect.pm2.dcpu[{#NAME},cpu]</key>
                             <delay>10s</delay>
                             <value_type>FLOAT</value_type>
+                            <units>%</units>
                             <params>{#CPU}</params>
+                            <applications>
+                                <application>
+                                    <name>ZPM2M</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>PM2: dstats: {#NAME}: memory</name>
+                            <type>CALCULATED</type>
+                            <key>nz.collect.pm2.dcpu[{#NAME},memory]</key>
+                            <delay>10s</delay>
+                            <units>B</units>
+                            <params>{#MEMORY}</params>
                             <applications>
                                 <application>
                                     <name>ZPM2M</name>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-03T17:03:23Z</date>
+    <date>2020-04-05T14:11:03Z</date>
     <groups>
         <group>
-            <name>Templates/Applications</name>
+            <name>Node.js</name>
         </group>
     </groups>
     <templates>
@@ -13,7 +13,7 @@
             <name>Node.js</name>
             <groups>
                 <group>
-                    <name>Templates/Applications</name>
+                    <name>Node.js</name>
                 </group>
             </groups>
             <applications>
@@ -25,8 +25,9 @@
                 <item>
                     <name>Node.js: Processes: used</name>
                     <key>proc.cpu.util[,,total,node]</key>
-                    <delay>5s</delay>
+                    <delay>10s</delay>
                     <value_type>FLOAT</value_type>
+                    <units>%</units>
                     <applications>
                         <application>
                             <name>Node.js</name>
@@ -34,10 +35,11 @@
                     </applications>
                 </item>
                 <item>
-                    <name>Node.js RAM: used</name>
+                    <name>Node.js RAM: used %</name>
                     <key>proc.mem[,,sum,node,pmem]</key>
-                    <delay>5s</delay>
+                    <delay>10s</delay>
                     <value_type>FLOAT</value_type>
+                    <units>%</units>
                     <applications>
                         <application>
                             <name>Node.js</name>
@@ -47,6 +49,7 @@
                 <item>
                     <name>Node.js Processes: total</name>
                     <key>proc.num[,,,node]</key>
+                    <units>%</units>
                     <applications>
                         <application>
                             <name>Node.js</name>
@@ -56,6 +59,7 @@
                 <item>
                     <name>Node.js RAM: total</name>
                     <key>vm.memory.size[total]</key>
+                    <units>B</units>
                     <applications>
                         <application>
                             <name>Node.js</name>
