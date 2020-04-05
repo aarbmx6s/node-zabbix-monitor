@@ -1,5 +1,4 @@
 const { exec, spawn } = require("child_process");
-const tools = require("./tools.js");
 
 function mongostat() {
     let child = exec("mongostat 5 --humanReadable=false --json");
