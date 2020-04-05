@@ -1,12 +1,16 @@
 {
   "name": "zabbix-pm2-monitor",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "PM2 information collector for zabbix",
   "main": "src/js/index.js",
   "bin": {
-    "zabbix-pm2-monitor": "./bin/index.js"
+    "zabbix-collect-pm2": "./bin/collect-pm2.js",
+    "zabbix-collect-mongo": "./bin/collect-mongo.js"
   },
-  "scripts": { },
+  "scripts": {},
   "author": "aarbmx6s",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^15.3.1"
+  }
 }

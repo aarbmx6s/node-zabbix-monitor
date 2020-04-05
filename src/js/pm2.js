@@ -106,7 +106,7 @@ async function run() {
         let string = JSON.stringify(collected);
     
         console.log(string);
-        process.exit(0);
+        process.exit(1);
     }
     catch (error) {
         console.error(error);
@@ -114,15 +114,4 @@ async function run() {
     }
 }
 
-module.exports = {
-    getPM2Info,
-    collectInfo,
-    run,
-};
-
-if ( require.main === module ) {
-    run().catch(function(error) {
-        console.error(error);
-        process.exit(2);
-    });
-}
+run().catch(console.error);
