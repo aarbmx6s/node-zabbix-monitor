@@ -114,8 +114,4 @@ async function run() {
     }
 }
 
-module.exports = {
-    getPM2Info,
-    collectInfo,
-    run,
-};
+run().catch(console.error);
