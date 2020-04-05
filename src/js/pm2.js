@@ -106,7 +106,7 @@ async function run() {
         let string = JSON.stringify(collected);
     
         console.log(string);
-        process.exit(0);
+        process.exit(1);
     }
     catch (error) {
         console.error(error);

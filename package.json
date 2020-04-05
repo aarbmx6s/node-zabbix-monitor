@@ -4,8 +4,8 @@
   "description": "PM2 information collector for zabbix",
   "main": "src/js/index.js",
   "bin": {
-    "zabbix-pm2-collect": "./bin/collect.js",
-    "zabbix-pm2-sender": "./bin/sender.js"
+    "zabbix-collect-pm2": "./bin/collect-pm2.js",
+    "zabbix-collect-mongo": "./bin/sender.js"
   },
   "scripts": {},
   "author": "aarbmx6s",
