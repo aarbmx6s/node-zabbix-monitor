@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-03T17:02:55Z</date>
+    <date>2020-04-05T11:39:57Z</date>
     <groups>
         <group>
             <name>CentOS 7</name>
@@ -55,6 +55,7 @@
                 <item>
                     <name>CentOS DISK: used</name>
                     <key>vfs.fs.size[/,used]</key>
+                    <units>B</units>
                 </item>
             </items>
         </template>

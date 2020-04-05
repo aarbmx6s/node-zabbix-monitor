@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-04T17:23:11Z</date>
+    <date>2020-04-05T12:13:43Z</date>
     <groups>
         <group>
-            <name>ZPM2M</name>
+            <name>PM2</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Zabbix PM2 monitor</template>
-            <name>Zabbix PM2 monitor</name>
+            <template>PM2</template>
+            <name>PM2</name>
             <groups>
                 <group>
-                    <name>ZPM2M</name>
+                    <name>PM2</name>
                 </group>
             </groups>
             <applications>
@@ -24,8 +24,8 @@
             <items>
                 <item>
                     <name>PM2: all</name>
-                    <key>pm2.monitor.all</key>
-                    <delay>15s</delay>
+                    <key>nz.collect.pm2</key>
+                    <delay>10s</delay>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <applications>
@@ -37,7 +37,7 @@
                 <item>
                     <name>PM2: online</name>
                     <type>DEPENDENT</type>
-                    <key>pm2.monitor.oproc</key>
+                    <key>nz.collect.pm2.online</key>
                     <delay>0</delay>
                     <applications>
                         <application>
@@ -51,13 +51,13 @@
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pm2.monitor.all</key>
+                        <key>nz.collect.pm2</key>
                     </master_item>
                 </item>
                 <item>
                     <name>PM2: stopped</name>
                     <type>DEPENDENT</type>
-                    <key>pm2.monitor.sproc</key>
+                    <key>nz.collect.pm2.stopped</key>
                     <delay>0</delay>
                     <applications>
                         <application>
@@ -71,13 +71,13 @@
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pm2.monitor.all</key>
+                        <key>nz.collect.pm2</key>
                     </master_item>
                 </item>
                 <item>
                     <name>PM2: total</name>
                     <type>DEPENDENT</type>
-                    <key>pm2.monitor.tproc</key>
+                    <key>nz.collect.pm2.total</key>
                     <delay>0</delay>
                     <applications>
                         <application>
@@ -91,13 +91,13 @@
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pm2.monitor.all</key>
+                        <key>nz.collect.pm2</key>
                     </master_item>
                 </item>
                 <item>
                     <name>PM2: unknown status</name>
                     <type>DEPENDENT</type>
-                    <key>pm2.monitor.uproc</key>
+                    <key>nz.collect.pm2.unknown</key>
                     <delay>0</delay>
                     <applications>
                         <application>
@@ -111,7 +111,7 @@
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pm2.monitor.all</key>
+                        <key>nz.collect.pm2</key>
                     </master_item>
                 </item>
             </items>
@@ -123,9 +123,9 @@
                     <delay>0</delay>
                     <item_prototypes>
                         <item_prototype>
-                            <name>PM2: stats: {#NAME}</name>
+                            <name>PM2: dstats: {#NAME}: cpu</name>
                             <type>CALCULATED</type>
-                            <key>pm.monitor.dcpu[{#NAME},cpu]</key>
+                            <key>nz.collect.pm2.dcpu[{#NAME},cpu]</key>
                             <delay>10s</delay>
                             <value_type>FLOAT</value_type>
                             <params>{#CPU}</params>
@@ -138,21 +138,21 @@
                     </item_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
-                            <name>PM2: stats: {#NAME} CPU</name>
+                            <name>PM2: dstats: {#NAME}: cpu</name>
                             <ymin_type_1>FIXED</ymin_type_1>
                             <graph_items>
                                 <graph_item>
                                     <color>1A7C11</color>
                                     <item>
-                                        <host>Zabbix PM2 monitor</host>
-                                        <key>pm.monitor.dcpu[{#NAME},cpu]</key>
+                                        <host>PM2</host>
+                                        <key>nz.collect.pm2.dcpu[{#NAME},cpu]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
                         </graph_prototype>
                     </graph_prototypes>
                     <master_item>
-                        <key>pm2.monitor.all</key>
+                        <key>nz.collect.pm2</key>
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
@@ -199,32 +199,32 @@
                 <graph_item>
                     <color>969696</color>
                     <item>
-                        <host>Zabbix PM2 monitor</host>
-                        <key>pm2.monitor.tproc</key>
+                        <host>PM2</host>
+                        <key>nz.collect.pm2.total</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <color>81C784</color>
                     <item>
-                        <host>Zabbix PM2 monitor</host>
-                        <key>pm2.monitor.oproc</key>
+                        <host>PM2</host>
+                        <key>nz.collect.pm2.online</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>2</sortorder>
                     <color>BF00FF</color>
                     <item>
-                        <host>Zabbix PM2 monitor</host>
-                        <key>pm2.monitor.uproc</key>
+                        <host>PM2</host>
+                        <key>nz.collect.pm2.unknown</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>3</sortorder>
                     <color>FF0000</color>
                     <item>
-                        <host>Zabbix PM2 monitor</host>
-                        <key>pm2.monitor.sproc</key>
+                        <host>PM2</host>
+                        <key>nz.collect.pm2.stopped</key>
                     </item>
                 </graph_item>
             </graph_items>
