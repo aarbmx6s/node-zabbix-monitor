@@ -10,5 +10,7 @@
   "scripts": {},
   "author": "aarbmx6s",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "yargs": "^15.3.1"
+  }
 }
