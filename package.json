@@ -4,9 +4,11 @@
   "description": "PM2 information collector for zabbix",
   "main": "src/js/index.js",
   "bin": {
-    "zabbix-pm2-monitor": "./bin/index.js"
+    "zabbix-pm2-collect": "./bin/collect.js",
+    "zabbix-pm2-sender": "./bin/sender.js"
   },
-  "scripts": { },
+  "scripts": {},
   "author": "aarbmx6s",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

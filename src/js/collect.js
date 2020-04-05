@@ -119,10 +119,3 @@ module.exports = {
     collectInfo,
     run,
 };
-
-if ( require.main === module ) {
-    run().catch(function(error) {
-        console.error(error);
-        process.exit(2);
-    });
-}
