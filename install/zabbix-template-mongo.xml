@@ -1,13 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-05T13:40:59Z</date>
+    <date>2020-04-06T07:57:19Z</date>
     <groups>
+        <group>
+            <name>CentOS 7</name>
+        </group>
         <group>
             <name>MongoDB</name>
         </group>
     </groups>
     <templates>
+        <template>
+            <template>CentOS 7</template>
+            <name>CentOS 7</name>
+            <groups>
+                <group>
+                    <name>CentOS 7</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Centos7</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>CPU: max</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.max</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>100</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.cpu.num[max]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>CentOS CPU: cores</name>
+                    <key>system.cpu.num[max]</key>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS CPU: load</name>
+                    <key>system.cpu.util</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS DISK: free</name>
+                    <key>vfs.fs.size[/,free]</key>
+                    <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS DISK: total</name>
+                    <key>vfs.fs.size[/,total]</key>
+                    <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS DISK: used</name>
+                    <key>vfs.fs.size[/,used]</key>
+                    <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+        </template>
         <template>
             <template>MongoDB</template>
             <name>MongoDB</name>
@@ -194,4 +284,50 @@
             </discovery_rules>
         </template>
     </templates>
+    <graphs>
+        <graph>
+            <name>CentOS CPU</name>
+            <graph_items>
+                <graph_item>
+                    <color>00FF00</color>
+                    <item>
+                        <host>CentOS 7</host>
+                        <key>system.cpu.max</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>FF0000</color>
+                    <item>
+                        <host>CentOS 7</host>
+                        <key>system.cpu.util</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>CentOS DISK</name>
+            <yaxismax>0.0000</yaxismax>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <type>PIE</type>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>CentOS 7</host>
+                        <key>vfs.fs.size[/,free]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>CentOS 7</host>
+                        <key>vfs.fs.size[/,used]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
 </zabbix_export>

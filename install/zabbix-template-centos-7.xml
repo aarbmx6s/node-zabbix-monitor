@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-05T13:51:11Z</date>
+    <date>2020-04-06T07:57:04Z</date>
     <groups>
         <group>
             <name>CentOS 7</name>
@@ -23,22 +23,15 @@
             </applications>
             <items>
                 <item>
-                    <name>CentOS CPU: load</name>
-                    <key>system.cpu.load[,]</key>
-                    <delay>10s</delay>
-                    <value_type>FLOAT</value_type>
-                    <units>%</units>
+                    <name>CPU: max</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.max</key>
+                    <delay>0</delay>
                     <applications>
                         <application>
                             <name>Centos7</name>
                         </application>
                     </applications>
-                </item>
-                <item>
-                    <name>CPU: max</name>
-                    <type>DEPENDENT</type>
-                    <key>system.cpu.max</key>
-                    <delay>0</delay>
                     <preprocessing>
                         <step>
                             <type>MULTIPLIER</type>
@@ -52,16 +45,53 @@
                 <item>
                     <name>CentOS CPU: cores</name>
                     <key>system.cpu.num[max]</key>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS CPU: load</name>
+                    <key>system.cpu.util</key>
+                    <delay>10s</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CentOS DISK: free</name>
+                    <key>vfs.fs.size[/,free]</key>
+                    <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
                 </item>
                 <item>
                     <name>CentOS DISK: total</name>
                     <key>vfs.fs.size[/,total]</key>
                     <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
                 </item>
                 <item>
                     <name>CentOS DISK: used</name>
                     <key>vfs.fs.size[/,used]</key>
                     <units>B</units>
+                    <applications>
+                        <application>
+                            <name>Centos7</name>
+                        </application>
+                    </applications>
                 </item>
             </items>
         </template>
@@ -82,24 +112,28 @@
                     <color>FF0000</color>
                     <item>
                         <host>CentOS 7</host>
-                        <key>system.cpu.load[,]</key>
+                        <key>system.cpu.util</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
             <name>CentOS DISK</name>
+            <yaxismax>0.0000</yaxismax>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <type>PIE</type>
             <graph_items>
                 <graph_item>
-                    <color>4B4B4B</color>
+                    <color>1A7C11</color>
                     <item>
                         <host>CentOS 7</host>
-                        <key>vfs.fs.size[/,total]</key>
+                        <key>vfs.fs.size[/,free]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <color>4CAF50</color>
+                    <color>F63100</color>
                     <item>
                         <host>CentOS 7</host>
                         <key>vfs.fs.size[/,used]</key>
