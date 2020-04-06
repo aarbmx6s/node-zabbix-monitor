@@ -1,353 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-06T07:57:47Z</date>
+    <date>2020-04-06T17:43:37Z</date>
     <groups>
-        <group>
-            <name>CentOS 7</name>
-        </group>
-        <group>
-            <name>MongoDB</name>
-        </group>
-        <group>
-            <name>Node.js</name>
-        </group>
         <group>
             <name>PM2</name>
         </group>
     </groups>
     <templates>
-        <template>
-            <template>CentOS 7</template>
-            <name>CentOS 7</name>
-            <groups>
-                <group>
-                    <name>CentOS 7</name>
-                </group>
-            </groups>
-            <applications>
-                <application>
-                    <name>Centos7</name>
-                </application>
-            </applications>
-            <items>
-                <item>
-                    <name>CPU: max</name>
-                    <type>DEPENDENT</type>
-                    <key>system.cpu.max</key>
-                    <delay>0</delay>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>MULTIPLIER</type>
-                            <params>100</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>system.cpu.num[max]</key>
-                    </master_item>
-                </item>
-                <item>
-                    <name>CentOS CPU: cores</name>
-                    <key>system.cpu.num[max]</key>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>CentOS CPU: load</name>
-                    <key>system.cpu.util</key>
-                    <delay>10s</delay>
-                    <value_type>FLOAT</value_type>
-                    <units>%</units>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>CentOS DISK: free</name>
-                    <key>vfs.fs.size[/,free]</key>
-                    <units>B</units>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>CentOS DISK: total</name>
-                    <key>vfs.fs.size[/,total]</key>
-                    <units>B</units>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>CentOS DISK: used</name>
-                    <key>vfs.fs.size[/,used]</key>
-                    <units>B</units>
-                    <applications>
-                        <application>
-                            <name>Centos7</name>
-                        </application>
-                    </applications>
-                </item>
-            </items>
-        </template>
-        <template>
-            <template>MongoDB</template>
-            <name>MongoDB</name>
-            <groups>
-                <group>
-                    <name>MongoDB</name>
-                </group>
-            </groups>
-            <applications>
-                <application>
-                    <name>MongoDB</name>
-                </application>
-            </applications>
-            <items>
-                <item>
-                    <name>MongoDB: all</name>
-                    <key>nz.collect.mongo[10]</key>
-                    <delay>10s</delay>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <applications>
-                        <application>
-                            <name>MongoDB</name>
-                        </application>
-                    </applications>
-                </item>
-            </items>
-            <discovery_rules>
-                <discovery_rule>
-                    <name>MongoDB: dstats</name>
-                    <type>DEPENDENT</type>
-                    <key>nz.collect.mongo.dstats</key>
-                    <delay>0</delay>
-                    <item_prototypes>
-                        <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: connections</name>
-                            <type>CALCULATED</type>
-                            <key>nz.collect.mongo.dhost[{#HOST},conns]</key>
-                            <delay>10s</delay>
-                            <params>{#CONNECTION}</params>
-                            <applications>
-                                <application>
-                                    <name>MongoDB</name>
-                                </application>
-                            </applications>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: op: delete</name>
-                            <type>CALCULATED</type>
-                            <key>nz.collect.mongo.dhost[{#HOST},delete]</key>
-                            <delay>10s</delay>
-                            <params>{#DELETE}</params>
-                            <applications>
-                                <application>
-                                    <name>MongoDB</name>
-                                </application>
-                            </applications>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: op: insert</name>
-                            <type>CALCULATED</type>
-                            <key>nz.collect.mongo.dhost[{#HOST},insert]</key>
-                            <delay>10s</delay>
-                            <params>{#INSERT}</params>
-                            <applications>
-                                <application>
-                                    <name>MongoDB</name>
-                                </application>
-                            </applications>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: op: query</name>
-                            <type>CALCULATED</type>
-                            <key>nz.collect.mongo.dhost[{#HOST},query]</key>
-                            <delay>10s</delay>
-                            <params>{#QUERY}</params>
-                            <applications>
-                                <application>
-                                    <name>MongoDB</name>
-                                </application>
-                            </applications>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>MongoDB: dstats: {#HOST}: op: update</name>
-                            <type>CALCULATED</type>
-                            <key>nz.collect.mongo.dhost[{#HOST},update]</key>
-                            <delay>10s</delay>
-                            <params>{#UPDATE}</params>
-                            <applications>
-                                <application>
-                                    <name>MongoDB</name>
-                                </application>
-                            </applications>
-                        </item_prototype>
-                    </item_prototypes>
-                    <graph_prototypes>
-                        <graph_prototype>
-                            <name>MongoDB: dstats: {#HOST}: connections</name>
-                            <ymin_type_1>FIXED</ymin_type_1>
-                            <graph_items>
-                                <graph_item>
-                                    <color>FF4000</color>
-                                    <item>
-                                        <host>MongoDB</host>
-                                        <key>nz.collect.mongo.dhost[{#HOST},conns]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                        <graph_prototype>
-                            <name>MongoDB: dstats: {#HOST}: operations</name>
-                            <ymin_type_1>FIXED</ymin_type_1>
-                            <graph_items>
-                                <graph_item>
-                                    <color>FF0000</color>
-                                    <item>
-                                        <host>MongoDB</host>
-                                        <key>nz.collect.mongo.dhost[{#HOST},delete]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>1</sortorder>
-                                    <color>0040FF</color>
-                                    <item>
-                                        <host>MongoDB</host>
-                                        <key>nz.collect.mongo.dhost[{#HOST},insert]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>2</sortorder>
-                                    <color>66BB6A</color>
-                                    <item>
-                                        <host>MongoDB</host>
-                                        <key>nz.collect.mongo.dhost[{#HOST},query]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>3</sortorder>
-                                    <color>BF00FF</color>
-                                    <item>
-                                        <host>MongoDB</host>
-                                        <key>nz.collect.mongo.dhost[{#HOST},update]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                    </graph_prototypes>
-                    <master_item>
-                        <key>nz.collect.mongo[10]</key>
-                    </master_item>
-                    <lld_macro_paths>
-                        <lld_macro_path>
-                            <lld_macro>{#HOST}</lld_macro>
-                            <path>$.host</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#CONNECTION}</lld_macro>
-                            <path>$.connection</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#DELETE}</lld_macro>
-                            <path>$.delete</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#INSERT}</lld_macro>
-                            <path>$.insert</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#QUERY}</lld_macro>
-                            <path>$.query</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#UPDATE}</lld_macro>
-                            <path>$.update</path>
-                        </lld_macro_path>
-                    </lld_macro_paths>
-                    <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.stats</params>
-                        </step>
-                    </preprocessing>
-                </discovery_rule>
-            </discovery_rules>
-        </template>
-        <template>
-            <template>Node.js</template>
-            <name>Node.js</name>
-            <groups>
-                <group>
-                    <name>Node.js</name>
-                </group>
-            </groups>
-            <applications>
-                <application>
-                    <name>Node.js</name>
-                </application>
-            </applications>
-            <items>
-                <item>
-                    <name>Node.js: Processes: used</name>
-                    <key>proc.cpu.util[,,total,node]</key>
-                    <delay>10s</delay>
-                    <value_type>FLOAT</value_type>
-                    <units>%</units>
-                    <applications>
-                        <application>
-                            <name>Node.js</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>Node.js RAM: used %</name>
-                    <key>proc.mem[,,sum,node,pmem]</key>
-                    <delay>10s</delay>
-                    <value_type>FLOAT</value_type>
-                    <units>%</units>
-                    <applications>
-                        <application>
-                            <name>Node.js</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>Node.js Processes: total</name>
-                    <key>proc.num[,,,node]</key>
-                    <applications>
-                        <application>
-                            <name>Node.js</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>Node.js RAM: total</name>
-                    <key>vm.memory.size[total]</key>
-                    <units>B</units>
-                    <applications>
-                        <application>
-                            <name>Node.js</name>
-                        </application>
-                    </applications>
-                </item>
-            </items>
-        </template>
         <template>
             <template>PM2</template>
             <name>PM2</name>
@@ -463,9 +123,9 @@
                     <delay>0</delay>
                     <item_prototypes>
                         <item_prototype>
-                            <name>PM2: dstats: {#NAME}{#PM_ID}: cpu</name>
+                            <name>PM2: dstats: {#NAMESPACE}_{#NAME}_{#PM_ID}: cpu</name>
                             <type>CALCULATED</type>
-                            <key>nz.collect.pm2.dcpu[{#NAME}{#PM_ID},cpu]</key>
+                            <key>nz.collect.pm2.dcpu[{#NAMESPACE}_{#NAME}_{#PM_ID},cpu]</key>
                             <delay>10s</delay>
                             <value_type>FLOAT</value_type>
                             <units>%</units>
@@ -477,9 +137,9 @@
                             </applications>
                         </item_prototype>
                         <item_prototype>
-                            <name>PM2: dstats: {#NAME}{#PM_ID}: memory</name>
+                            <name>PM2: dstats: {#NAMESPACE}_{#NAME}_{#PM_ID}: memory</name>
                             <type>CALCULATED</type>
-                            <key>nz.collect.pm2.dcpu[{#NAME}{#PM_ID},memory]</key>
+                            <key>nz.collect.pm2.dcpu[{#NAMESPACE}_{#NAME}_{#PM_ID},memory]</key>
                             <delay>10s</delay>
                             <units>B</units>
                             <params>{#MEMORY}</params>
@@ -499,7 +159,7 @@
                                     <color>1A7C11</color>
                                     <item>
                                         <host>PM2</host>
-                                        <key>nz.collect.pm2.dcpu[{#NAME}{#PM_ID},cpu]</key>
+                                        <key>nz.collect.pm2.dcpu[{#NAMESPACE}_{#NAME}_{#PM_ID},cpu]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -510,28 +170,28 @@
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#NAME}</lld_macro>
-                            <path>$.name</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#CPU}</lld_macro>
                             <path>$.cpu</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MEMORY}</lld_macro>
+                            <path>$.memory</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#NAMESPACE}</lld_macro>
                             <path>$.namespace</path>
                         </lld_macro_path>
                         <lld_macro_path>
-                            <lld_macro>{#STATUS}</lld_macro>
-                            <path>$.status</path>
+                            <lld_macro>{#NAME}</lld_macro>
+                            <path>$.name</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#PM_ID}</lld_macro>
                             <path>$.pm_id</path>
                         </lld_macro_path>
                         <lld_macro_path>
-                            <lld_macro>{#MEMORY}</lld_macro>
-                            <path>$.memory</path>
+                            <lld_macro>{#STATUS}</lld_macro>
+                            <path>$.status</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                     <preprocessing>
@@ -546,95 +206,11 @@
     </templates>
     <graphs>
         <graph>
-            <name>CentOS CPU</name>
-            <graph_items>
-                <graph_item>
-                    <color>00FF00</color>
-                    <item>
-                        <host>CentOS 7</host>
-                        <key>system.cpu.max</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <color>FF0000</color>
-                    <item>
-                        <host>CentOS 7</host>
-                        <key>system.cpu.util</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>CentOS DISK</name>
+            <name>PM2 Processes</name>
             <yaxismax>0.0000</yaxismax>
             <show_work_period>NO</show_work_period>
             <show_triggers>NO</show_triggers>
             <type>PIE</type>
-            <graph_items>
-                <graph_item>
-                    <color>1A7C11</color>
-                    <item>
-                        <host>CentOS 7</host>
-                        <key>vfs.fs.size[/,free]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <color>F63100</color>
-                    <item>
-                        <host>CentOS 7</host>
-                        <key>vfs.fs.size[/,used]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Node.js: Processes</name>
-            <ymin_type_1>FIXED</ymin_type_1>
-            <graph_items>
-                <graph_item>
-                    <color>1A7C11</color>
-                    <item>
-                        <host>Node.js</host>
-                        <key>proc.num[,,,node]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <color>F63100</color>
-                    <yaxisside>RIGHT</yaxisside>
-                    <item>
-                        <host>Node.js</host>
-                        <key>proc.cpu.util[,,total,node]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Node.js RAM</name>
-            <graph_items>
-                <graph_item>
-                    <color>1A7C11</color>
-                    <item>
-                        <host>Node.js</host>
-                        <key>vm.memory.size[total]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <color>F63100</color>
-                    <item>
-                        <host>Node.js</host>
-                        <key>proc.mem[,,sum,node,pmem]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>PM2 Processes</name>
-            <show_work_period>NO</show_work_period>
-            <show_triggers>NO</show_triggers>
             <graph_items>
                 <graph_item>
                     <color>969696</color>
