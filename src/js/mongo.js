@@ -23,7 +23,6 @@
  */
 
 const { exec } = require("child_process");
-const argv = require("yargs").argv;
 
 /**
  * @param {Object<String, MongoDBStats>} stats
