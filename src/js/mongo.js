@@ -61,7 +61,6 @@ function execute(cmd) {
     return new Promise(function(resolve, reject) {
         let child = exec(cmd);
         let data = "";
-        let count = 0;
 
         function errorHandler(error) {
             reject(error);
@@ -69,31 +68,31 @@ function execute(cmd) {
         function exitHandler(code, signal) {
             reject(new Error(`Process has been exited with ${code} code.`));
         }
+        function endHandler() {
+            child.stdout.off("end", endHandler);
+            child.stdout.off("data", dataHandler);
+            
+            child.stderr.unpipe(process.stderr);
+
+            child.off("exit", exitHandler);
+            child.off("error", errorHandler);
+
+            child.kill("SIGTERM");
+
+            resolve(data);
+        }
         function dataHandler(chunk) {
             data += chunk;
-            count += 1;
-
-            if ( /\n$/.test(chunk) ) {
-                child.stdout.off("data", dataHandler);
-                child.stderr.unpipe(process.stderr);
-
-                child.off("exit", exitHandler);
-                child.off("error", errorHandler);
-
-                child.kill("SIGTERM");
-                resolve(data);
-            }
-            else if ( count === 10 ) {
-                child.kill("SIGCONT");
-            }
         }
 
         child.on("error", errorHandler);
         child.on("exit", exitHandler);
 
         child.stderr.pipe(process.stderr);
+
         child.stdout.setEncoding("utf8");
         child.stdout.on("data", dataHandler);
+        child.stdout.on("end", endHandler);
     });
 }
 
