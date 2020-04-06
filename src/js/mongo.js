@@ -24,7 +24,6 @@
 
 const { exec } = require("child_process");
 const argv = require("yargs").argv;
-const ROW_COUNT = argv.rowcount || 1;
 
 /**
  * @param {Object<String, MongoDBStats>} stats
@@ -100,7 +99,7 @@ function execute(cmd) {
 
 async function run() {
     let stats = await Promise.all([
-        execute(`mongostat --humanReadable=false --json -o='conn,query,insert,update,delete' --rowcount=${ROW_COUNT} 1`),
+        execute(`mongostat --humanReadable=false --json -o='conn,query,insert,update,delete' -n=1 1`),
         // execute("mongotop --json"),
     ]);
     let collection = processMongoStats(JSON.parse(stats[0]), null);
